@@ -4,7 +4,16 @@ matplotlib.use( 'tkagg' )
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
+y0 = [10,1] # [fish, bears] units in hundreds
 
+t = np.linspace(0,50,num=1000)
+
+alpha = 1.1
+beta = 0.4
+delta = 0.1
+gamma = 0.4
+
+params = [alpha, beta, delta, gamma]
 
 def sim(variables, t, params):
     #fish population level
@@ -22,5 +31,7 @@ def sim(variables, t, params):
     dydt = delta * x * y - gamma * y
 
     return([dxdt, dydt])
+
+y = odeint(sim, y0, t, args=(params,))
  
 
